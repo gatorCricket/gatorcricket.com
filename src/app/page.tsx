@@ -1,103 +1,73 @@
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+const captainForm = process.env.NEXT_PUBLIC_FORM_CAPTAIN || "";
+const playerForm  = process.env.NEXT_PUBLIC_FORM_PLAYER  || "";
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+export default function HomePage() {
+  return (
+    <section className="min-h-[100svh]">
+      <div className="mx-auto grid h-full max-w-7xl grid-cols-1 items-center gap-10 px-6 py-8 md:grid-cols-2">
+        {/* Left: Headline & text */}
+        <div>
+          <h1 className="text-4xl font-extrabold leading-tight md:text-6xl">
+            🏆 Gator Cricket —<br /> National Collegiate Champions
+          </h1>
+          <p className="mt-6 text-lg text-white/90">
+            Proudly representing the University of Florida and the Gainesville cricket community.
+          </p>
+          <p className="mt-2 text-base text-white/80">
+            Building the next generation of cricket at UF.
+          </p>
+
+          {/* CTA (inside hero so we don’t add extra height) */}
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a
+              href={captainForm || undefined}
+              target={captainForm ? "_blank" : undefined}
+              rel={captainForm ? "noopener noreferrer" : undefined}
+              aria-disabled={!captainForm}
+              className={[
+                "rounded-md px-6 py-3 font-semibold transition",
+                captainForm
+                  ? "bg-white text-uf-blue hover:bg-uf-orange hover:text-white"
+                  : "cursor-not-allowed bg-white/30 text-white/60"
+              ].join(" ")}
+            >
+              {captainForm ? "Register as Captain" : "Captain Form Coming Soon"}
+            </a>
+
+            <a
+              href={playerForm || undefined}
+              target={playerForm ? "_blank" : undefined}
+              rel={playerForm ? "noopener noreferrer" : undefined}
+              aria-disabled={!playerForm}
+              className={[
+                "rounded-md px-6 py-3 font-semibold transition",
+                playerForm
+                  ? "border border-white text-white hover:border-uf-orange hover:bg-uf-orange"
+                  : "cursor-not-allowed border border-white/40 text-white/60"
+              ].join(" ")}
+            >
+              {playerForm ? "Register as Player" : "Player Form Coming Soon"}
+            </a>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+
+        {/* Right: ONE image, keeps aspect (no crop) */}
+        <div className="flex w-full justify-center">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/images/image.png"
+            alt="Gator Cricket Team"
+            width={720}
+            height={540}
+            className="h-auto w-full max-w-[720px] rounded-2xl border border-white/20 bg-white/5 shadow-xl ring-1 ring-black/10"
+            priority
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </div>
+      </div>
+
+      {/* thin UF orange line at the bottom for flair */}
+      <div className="h-1 w-full bg-uf-orange" />
+    </section>
   );
 }

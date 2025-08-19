@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  devIndicators: {
+    buildActivity: false, // hides the little “N” build bubble in dev
+  },
 };
 
 export default nextConfig;
